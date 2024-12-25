@@ -16,15 +16,15 @@ jobs:
       - name: Setting an error message with parameters
         id: set-error-params
         run: |
-          echo "::error title = Error title, file= app.js, line= 2, endLine= 3, col = 7::This is a custom error message"
+          echo "::error title=Error title, file=app.js,line=2, endLine=3,col=7::This is a custom error message"
       
       - name: Setting an notice message with parameters
         id: set-notice-params
         run: |
-          echo "::notice title = notice title, file= app.js, line= 2, endLine= 3, col = 7::This is a custom notice message"
+          echo "::notice title = notice title, file=app.js,line=2, endLine=3,col=7::This is a custom notice message"
       
       - name: Setting an Warning message with parameters
         id: set-Warning-params
         run: |
-          echo "::warning title = Warning title, file= app.js, line= 2, endLine= 3, col = 7::This is a custom Warning message"
+          echo "::warning title = Warning title, file=app.js,line=2, endLine=3,col=7::This is a custom Warning message"
       
