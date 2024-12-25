@@ -43,6 +43,7 @@ jobs:
         id: mask-log
         run: |
           echo "::log::masked value: ${MASKED_VALUE}"
+          echo "::add-mask::masked value: ${MASKED_VALUE}"
           echo "::add-mask::This is the masked value in log str"
 
           echo "::group::masked"
@@ -51,10 +52,10 @@ jobs:
           echo "secret-number=$the_secret" >> "$GITHUB_OUTPUT"
           echo "::endgroup::"
 
-          echo "::grouped::unmasked"
+          echo "::group::unmasked"
           the_not_secret=$((RANDOM))
           echo "::notice::This is the not masked value in log str"
-          echo "not-secret-num=$the_not_secret" >> "%GITHUB_OUTPUT"
+          echo "not-secret-num=$the_not_secret" >> "$GITHUB_OUTPUT"
 
       - name: Use that secret output (protected by a mask)
         run: |
