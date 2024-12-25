@@ -1,0 +1,14 @@
+name: Workflow Commands
+on:
+  push:
+    branches: [master]
+jobs:
+  workflow-command-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setting an error message
+        id: set-error
+        run: |
+          echo "::error::This is a custom error message"
