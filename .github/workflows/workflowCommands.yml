@@ -27,3 +27,13 @@ jobs:
         id: set-Warning-params
         run: |
           echo "::warning title=Warning title,file=app.js,line=2,endLine=3,col=7::This is a custom Warning message"
+      - name: Grouping all messages
+        id: group-msg
+        run: |
+          echo "::group::Group messages"
+          echo "::error::error msg"
+          echo "::notice::notice msg"
+          echo "::warning::warning msg"
+          echo "::debug::debug msg"
+          echo "::endgroup::"
+          
