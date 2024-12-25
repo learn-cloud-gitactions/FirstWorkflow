@@ -5,6 +5,8 @@ on:
 jobs:
   workflow-command-test:
     runs-on: ubuntu-latest
+    env:
+      MASKED_VALUE: "masked value in env var"
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -36,4 +38,25 @@ jobs:
           echo "::warning::warning msg"
           echo "::debug::debug msg"
           echo "::endgroup::"
-          
+      
+      - name: masking avalue in a log
+        id: mask-log
+        run: |
+          echo "::log::masked value: ${MASKED_VALUE}"
+          echo "::add-mask::This is the masked value in log str"
+
+          echo "::group::masked"
+          the_secret=$((RANDOM))
+          echo "::add-mask::$the_secret"
+          echo "secret-number=$the_secret" >> "$GITHUB_OUTPUT"
+          echo "::endgroup::"
+
+          echo "::grouped::unmasked"
+          the_not_secret=$((RANDOM))
+          echo "::notice::This is the not masked value in log str"
+          echo "not-secret-num=$the_not_secret" >> "%GITHUB_OUTPUT"
+
+      - name: Use that secret output (protected by a mask)
+        run: |
+          echo "the secret number is ${{ steps.mask-log.outputs.secret-number }}"
+          echo "the not secret num is ${{steps.mask-log.outputs.not-secret-num}}"
