@@ -101,3 +101,15 @@ jobs:
   #         RETRIEVED_SECRET=$((SECRET-STORE RETIEVE-SECRET "$SECRET_HANDLE"))
   #         echo "::add-mask::$RETRIEVED-SECRET"
   #         edho "We retieved our masked secret: $RETRIEVED_SECRET"
+    
+    workflow-command-job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Disable workfolow commands
+          runs: |
+            echo: '::warning:: This isa warning message, to demonstrate that commands are being processed.'
+            stopMarker=$((uuidgen))
+            echo '::stop-commands::$stopMarker'
+            echo '::warning:: This will NOT be rendered as a warning, because stip-commands has been invoked.'
+            echo "::$stopMarker::"
+            echo "::warning:: This is a warnig again, because stop-commands has been turned off"
