@@ -62,42 +62,42 @@ jobs:
           echo "the secret number is ${{ steps.mask-log.outputs.secret-number }}"
           echo "the not secret num is ${{steps.mask-log.outputs.not-secret-num}}"
       
-  generate-secret-pass-bw-jobs-wf:
-    runs-on: ubuntu-latest
-    outputs:
-      handle: ${{ steps.gen-secret.outputs.handle }}
-    steps:
-      - name: spin up a secret store
-        id: spinup-ss
-        uses: some/secret-store@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-        with:
-          credentials: ${{secrets.SECRET_STORE_CREDENTIALS }}
-          instance: ${{secrets.SECRET_STORE_INSTANCE}}
-      - name: generate-secret
-        id: gen-secret
-        shell: bash
-        run: |
-          GENERATED_SECRET=$((RANDOM))
-          echo "::group::generate secret"
-          echo "::add-mask::$GENERATED_SECRET"
-          SECRET_HANDLE=$((secret-store store-secret "$GENERATED_SECRET"))
-          echo "handle=$SECRET_HANDLE" >> "$GITHUB_OUTPUT"
-  secret-consumer:
-    runs-on: ubuntu-latest
-    needs: generate-secret-pass-bw-jobs-wf
-    steps:
-      - name: spin up a secret store
-        id: spinup-ss
-        uses: some/secret-store@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-        with:
-          credentials: ${{secrets.SECRET_STORE_CREDENTIALS }}
-          instance: ${{secrets.SECRET_STORE_INSTANCE}}
+  # generate-secret-pass-bw-jobs-wf:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     handle: ${{ steps.gen-secret.outputs.handle }}
+  #   steps:
+  #     - name: spin up a secret store
+  #       id: spinup-ss
+  #       uses: some/secret-store@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+  #       with:
+  #         credentials: ${{secrets.SECRET_STORE_CREDENTIALS }}
+  #         instance: ${{secrets.SECRET_STORE_INSTANCE}}
+  #     - name: generate-secret
+  #       id: gen-secret
+  #       shell: bash
+  #       run: |
+  #         GENERATED_SECRET=$((RANDOM))
+  #         echo "::group::generate secret"
+  #         echo "::add-mask::$GENERATED_SECRET"
+  #         SECRET_HANDLE=$((secret-store store-secret "$GENERATED_SECRET"))
+  #         echo "handle=$SECRET_HANDLE" >> "$GITHUB_OUTPUT"
+  # secret-consumer:
+  #   runs-on: ubuntu-latest
+  #   needs: generate-secret-pass-bw-jobs-wf
+  #   steps:
+  #     - name: spin up a secret store
+  #       id: spinup-ss
+  #       uses: some/secret-store@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+  #       with:
+  #         credentials: ${{secrets.SECRET_STORE_CREDENTIALS }}
+  #         instance: ${{secrets.SECRET_STORE_INSTANCE}}
 
-      - name: use the secret
-        id: use-secret
-        shell: bash
-        run: |
-          SECRET_HANDLE=${{ needs.generate-secret-pass-bw-jobs-wf.outputs.handle }}
-          RETRIEVED_SECRET=$((SECRET-STORE RETIEVE-SECRET "$SECRET_HANDLE"))
-          echo "::add-mask::$RETRIEVED-SECRET"
-          edho "We retieved our masked secret: $RETRIEVED_SECRET"
+  #     - name: use the secret
+  #       id: use-secret
+  #       shell: bash
+  #       run: |
+  #         SECRET_HANDLE=${{ needs.generate-secret-pass-bw-jobs-wf.outputs.handle }}
+  #         RETRIEVED_SECRET=$((SECRET-STORE RETIEVE-SECRET "$SECRET_HANDLE"))
+  #         echo "::add-mask::$RETRIEVED-SECRET"
+  #         edho "We retieved our masked secret: $RETRIEVED_SECRET"
