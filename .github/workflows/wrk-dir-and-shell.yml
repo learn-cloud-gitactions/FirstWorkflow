@@ -1,0 +1,32 @@
+name: Working directories and Shells
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  display-wd-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Display Working Directory $ List Files
+        run: |
+          pwd
+          ls -a
+          echo $GITHIB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+  display-wd-info-windows:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Display Working Directory $ List Files
+        shell: bash
+        run: |
+          pwd
+          ls -a
+          echo $GITHIB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
