@@ -1,0 +1,22 @@
+name: event trigger wf
+
+on:
+  push:
+    branches: master
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issues:
+
+jobs:
+  
+  checkout-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: github_sha_ref
+        id: sha-ref
+        run: |
+          echo "github.sha: $GITHUB_SHA"
+          echo "github.ref: $GITHUB_REF"
+      - name: checkout
+        uses: actions/checkout@v4
+        
