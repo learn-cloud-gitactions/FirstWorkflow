@@ -2,7 +2,7 @@ name: event trigger wf
 
 on:
   push:
-    branches: master
+    branches: [master, devlop]
   pull_request:
     types: [opened, synchronize, reopened]
   issues:
