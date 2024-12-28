@@ -1,0 +1,13 @@
+nama: Trigger workflow Manually
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  echo-string:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger workflow Manually
+        run: echo "Hello, World!"
+        
