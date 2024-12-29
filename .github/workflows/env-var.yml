@@ -34,9 +34,9 @@ jobs:
         run: |
           echo ${{ env.JOB_LEVEL_ENV }}=overriden
           echo ${{ env.WF_LEVEL_ENV }}
-          echo "TEST_OVERRIDE_VAR=${{'Overiden using GitHub_Env var file'}}" >> $GITHUB_ENV
+          echo "TEST_OVERRIDE_VAR={'Overiden using GitHub_Env var file'}" >> $GITHUB_ENV
           echo $TEST_OVERRIDE_VAR
-          
+
 
 
       
