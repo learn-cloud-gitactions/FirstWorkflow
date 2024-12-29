@@ -11,7 +11,7 @@ jobs:
   env-contexts:
     runs-on: ubuntu-latest
     # if: $GITHUB_REF == 'refs/heads/master'
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/devlop'
     env:
       JOB_LEVEL_ENV: Available to all steps in env vars
       TEST_OVERRIDE_VAR: Initial value
@@ -34,7 +34,7 @@ jobs:
         run: |
           echo ${{ env.JOB_LEVEL_ENV }}=overriden
           echo ${{ env.WF_LEVEL_ENV }}
-          echo "TEST_OVERRIDE_VAR={'Overiden using GitHub_Env var file'}" >> $GITHUB_ENV
+          "TEST_OVERRIDE_VAR="Overiden using GitHub_Env var file"
           echo $TEST_OVERRIDE_VAR
 
 
