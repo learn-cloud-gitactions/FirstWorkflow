@@ -48,8 +48,8 @@ jobs:
 
           {
             echo 'MULTI_VAR_ENV<<EOF'
-            $VARIABLE_NAME1
-            $VARIABLE_NAME2
+            echo $VARIABLE_NAME1
+            echo $VARIABLE_NAME2
             echo EOF
           } >> "$GITHUB_ENV"
           echo $MULTI_VAR_ENV
