@@ -31,6 +31,7 @@ jobs:
       - name: override env
         env:
           WF_LEVEL_ENV: "overriden WF_LEVEL_ENV" # This will be overrided 
+          VARIABLE_NAME:
         run: |
           echo ${{ env.JOB_LEVEL_ENV }}=overriden
           echo ${{ env.WF_LEVEL_ENV }}
