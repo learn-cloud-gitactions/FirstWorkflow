@@ -39,6 +39,11 @@ jobs:
           VARIABLE_NAME="value"
           echo "VARIABLE_NAME=$VARIABLE_NAME" >> $GITHUB_ENV
           echo $VARIABLE_NAME
+      - name: Set an environment variable
+        run: echo "MY_ENV_VARr=Hello World" >> $GITHUB_ENV
+  
+      - name: Use the environment variable
+        run: echo "Value= $MY_ENV_VARr"
 
       - name: Multi line env var
         id: multi-line
