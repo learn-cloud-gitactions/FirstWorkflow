@@ -1,0 +1,48 @@
+name: Expressions & Contexts
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [master]
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      expression:
+        description: The expression to evaluate
+        required: true
+        default: "1 + 2"
+        type: string
+
+jobs:
+  using-exp-and-contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Evaluate expression
+        id: evaluate-expression
+        run: |
+          echo "${{ 1 }}"
+          echo ${{ 'It''s open source!' }}
+          echo "${{null}}"
+          echo "${{true}}"
+          echo "${{1>2}}"
+          echo "${{ 'string' == 'String'}}"
+          echo "${{true && false}}"
+          echo "${{true || (false && true)}}"
+          echo "${{false}}"
+
+  Dump-Contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump Contexts
+        id: contexts
+        run: |
+          echo "${{ toJSON(github) }}"
+          echo "${{ toJSON(steps) }}"
+          echo "${{ toJSON(needs) }}"
+          echo "${{ toJSON(runner) }}"
+          echo "${{ toJSON(steps) }}"
+          echo "${{ toJSON(secrets) }}"
