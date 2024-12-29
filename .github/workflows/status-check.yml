@@ -13,8 +13,12 @@ jobs:
           sleep 20
           echo "print string"
       - name: make failue
+        id: step-fail
         run: exit 1
-      - name: runs on Failure
+      - name: runs on step 2 Failure
+        if: steps.step-fail.conclusion == 'failure'
+        run: echo 'runs on failure'
+      - name: runs on  Failure
         if: failure() # any of the previous steps failed
         run: echo 'runs on failure'
       - name: runs on Success
