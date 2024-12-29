@@ -14,6 +14,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     env:
       JOB_LEVEL_ENV: Available to all steps in env vars
+      TEST_OVERRIDE_VAR: Initial value
     steps:
       - name: Log ENV Var
         run: echo $GITHUB_REF # It is available on runner machine and evaluated their
@@ -29,10 +30,13 @@ jobs:
           echo $STEP_LEVEL_ENV 
       - name: override env
         env:
-          WF_LEVEL_ENV: "overriden WF_LEVEL_ENV"
+          WF_LEVEL_ENV: "overriden WF_LEVEL_ENV" # This will be overrided 
         run: |
           echo ${{ env.JOB_LEVEL_ENV }}=overriden
           echo ${{ env.WF_LEVEL_ENV }}
+          echo "TEST_OVERRIDE_VAR=${{'Overiden using GitHub_Env var file'}}" >> $GITHUB_ENV
+          echo $TEST_OVERRIDE_VAR
+          
 
 
       
