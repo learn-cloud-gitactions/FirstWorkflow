@@ -36,7 +36,7 @@ jobs:
           echo ${{ env.WF_LEVEL_ENV }}
           TEST_OVERRIDE_VAR="Overiden using GitHub_Env var file"
           echo $TEST_OVERRIDE_VAR
-          echo "TEST_ENV_VAR_FILE"="value of test env var to file" >> $GITHUB_ENV
+          echo "TEST_ENV_VAR_FILE=value of test env var to file" >> $GITHUB_ENV
           echo $TEST_ENV_VAR_FILE
 
 
