@@ -43,10 +43,13 @@ jobs:
       - name: Multi line env var
         id: multi-line
         run: |
+          VARIABLE_NAME1="value1"
+          VARIABLE_NAME2="value2"
+
           {
             echo 'MULTI_VAR_ENV<<EOF'
-            'line1'
-            'line2'
+            $VARIABLE_NAME1
+            $VARIABLE_NAME2
             echo EOF
           } >> "$GITHUB_ENV"
           echo $MULTI_VAR_ENV
