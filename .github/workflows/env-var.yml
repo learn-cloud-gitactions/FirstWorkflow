@@ -1,0 +1,38 @@
+name: Environment Variables
+
+on:
+  push:
+    branches: [devlop, master]
+
+env:
+  WF_LEVEL_ENV: Available to all jobs in env vars
+
+jobs:
+  env-contexts:
+    runs-on: ubuntu-latest
+    # if: $GITHUB_REF == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
+    env:
+      JOB_LEVEL_ENV: Available to all steps in env vars
+    steps:
+      - name: Log ENV Var
+        run: echo $GITHUB_REF # It is available on runner machine and evaluated their
+      - name: Log Context
+        run: |
+          echo ${{ github.ref }} # It is evaluated before sending it to runner machine i.e. final result is sent
+      - name: custom Env Var
+        env:
+          STEP_LEVEL_ENV: "step level env var"
+        run: |
+          echo ${{ env.JOB_LEVEL_ENV }}
+          echo ${{ env.STEP_LEVEL_ENV }}
+          echo $STEP_LEVEL_ENV 
+      - name: override env
+        env:
+          WF_LEVEL_ENV: "overriden WF_LEVEL_ENV"
+        run: |
+          echo ${{ env.JOB_LEVEL_ENV }}=overriden
+          echo ${{ env.WF_LEVEL_ENV }}
+
+
+      
