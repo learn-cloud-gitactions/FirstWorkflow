@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1
-        run: sleep 20
+        run: |
+          sleep 20
+          echo "print string"
       - name: runs on Failure
         if: failure() # any of the previous steps failed
         run: echo 'runs on failure'
