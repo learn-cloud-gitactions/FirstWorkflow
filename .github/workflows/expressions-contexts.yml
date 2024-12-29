@@ -1,4 +1,4 @@
-name: Expressions & Contexts
+name: Expressions and context
 
 on:
   push:
@@ -41,6 +41,8 @@ jobs:
         id: contexts
         run: |
           echo "${{ toJSON(github) }}"
+          echo "${{ toJSON(github.event) }}"
+          echo ${{job}}
           echo "${{ toJSON(steps) }}"
           echo "${{ toJSON(needs) }}"
           echo "${{ toJSON(runner) }}"
