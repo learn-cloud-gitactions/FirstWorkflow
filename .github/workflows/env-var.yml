@@ -49,7 +49,7 @@ jobs:
             line 2
             line 3
             echo DIL
-          } >> $GITHUB_ENV
+          } >> '$GITHUB_ENV'
           echo $MULTI_VAR_ENV
 
 
