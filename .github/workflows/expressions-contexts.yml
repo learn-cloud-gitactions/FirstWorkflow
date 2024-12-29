@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
+        if: >-
+          ${{github.event_name == 'push'}}
         uses: actions/checkout@v2
       - name: Evaluate expression
         id: evaluate-expression
@@ -48,3 +50,12 @@ jobs:
           echo "${{ toJSON(runner) }}"
           echo "${{ toJSON(steps) }}"
           echo "${{ toJSON(secrets) }}"
+  pr-job:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: test if
+        id: if-pr
+        run: |
+          echo "it is pull request"
+
