@@ -44,12 +44,13 @@ jobs:
         id: multi-line
         run: |
           {
-            echo MULTI_VAR_ENV<<DIL
+            echo 'MULTI_VAR_ENV<<DIL'
             line 1
             line 2
             line 3
             echo DIL
-          }>> $GITHUB_ENV
+          } >> $GITHUB_ENV
+          echo $MULTI_VAR_ENV
 
 
 
