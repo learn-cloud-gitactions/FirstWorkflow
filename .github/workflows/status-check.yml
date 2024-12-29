@@ -12,6 +12,8 @@ jobs:
         run: |
           sleep 20
           echo "print string"
+      - name: make failue
+        run: exit 1
       - name: runs on Failure
         if: failure() # any of the previous steps failed
         run: echo 'runs on failure'
