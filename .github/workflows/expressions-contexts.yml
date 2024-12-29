@@ -60,4 +60,11 @@ jobs:
           echo "it is pull request"
           echo "${{ fromJson('["hi","hello"]') }}"
           echo "${{ contains(fromJson('["push","issues"]'),github.event_name)}}"
+  runs-on-issues-and-prs:
+    runs-on: ubuntu-latest
+    if: contains(fromJson('["issues","pull_request"]'), github.event_name)
+    steps:
+      - name: Run only if issue has a bug label
+        if: contains(github.event.issue.labels.*.name, 'bug')
+        run: echo ${{ join(github.event.issue.labels.*.name, ', ') }}
 
