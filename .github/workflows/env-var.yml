@@ -30,14 +30,14 @@ jobs:
           echo $STEP_LEVEL_ENV 
       - name: override env
         env:
-          WF_LEVEL_ENV: "overriden WF_LEVEL_ENV" # This will be overrided 
-          VARIABLE_NAME:
+          WF_LEVEL_ENV: "overriden WF_LEVEL_ENV" # This will be overrided
         run: |
           echo ${{ env.JOB_LEVEL_ENV }}=overriden
           echo ${{ env.WF_LEVEL_ENV }}
           TEST_OVERRIDE_VAR="Overiden using GitHub_Env var file"
           echo $TEST_OVERRIDE_VAR
-          echo "VARIABLE_NAME=value" >> $GITHUB_ENV
+          "VARIABLE_NAME=value"
+          echo "VARIABLE_NAME=$VARIABLE_NAME" >> $GITHUB_ENV
           echo $VARIABLE_NAME
 
 
