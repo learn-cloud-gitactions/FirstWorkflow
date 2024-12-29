@@ -45,8 +45,8 @@ jobs:
         run: |
           {
             echo 'MULTI_VAR_ENV<<EOF'
-            line1
-            line2
+            'line1'
+            'line2'
             echo EOF
           } >> "$GITHUB_ENV"
           echo $MULTI_VAR_ENV
