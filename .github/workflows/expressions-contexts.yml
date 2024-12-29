@@ -2,7 +2,7 @@ name: Expressions and context
 
 on:
   push:
-    branches: [devlop]
+    branches: [devlop, master]
   pull_request:
     branches: [master]
   issues:
@@ -58,4 +58,6 @@ jobs:
         id: if-pr
         run: |
           echo "it is pull request"
+          echo "${{ fromJson('["hi","hello"]') }}"
+          echo "${{ contains(fromJson('["push","issues"]'),github.event_name)}}"
 
