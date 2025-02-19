@@ -3,7 +3,7 @@ name: Status Check Fun
 on:
   push:
     branches: [devlop, master]
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   job-1:
