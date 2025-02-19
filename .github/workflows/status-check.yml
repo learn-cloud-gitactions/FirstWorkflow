@@ -10,8 +10,9 @@ jobs:
     steps:
       - name: Step 1
         run: |
-          sleep 20
+          sleep 70
           echo "print string"
+        timeout-minutes: 1
       - name: make failue
         id: step-fail
         run: exit 1
