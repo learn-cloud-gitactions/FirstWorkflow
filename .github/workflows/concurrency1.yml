@@ -16,20 +16,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print github context
-        run: echo ${{ toJson(github) }}
+        run: echo '${{ toJson(github) }}'
       - name: Print env context
-        run: echo ${{ toJson(env) }}
+        run: echo '${{ toJson(env) }}'
       - name: Print job context
-        run: echo ${{ toJson(job) }}
+        run: echo '${{ toJson(job) }}'
       - name: Print runner context
-        run: echo ${{ toJson(runner) }}
+        run: echo '${{ toJson(runner) }}'
       - name: Print steps context
-        run: echo ${{ toJson(steps) }}
+        run: echo '${{ toJson(steps) }}'
       - name: Print strategy context
-        run: echo ${{ toJson(strategy) }}
+        run: echo '${{ toJson(strategy) }}'
       - name: Print inputs context
-        run: echo ${{ toJson(inputs) }}
-      # Removed secrets context for security reasons
+        run: echo '${{ toJson(inputs) }}'
       - name: Print matrix context
-        run: echo ${{ toJson(matrix) }}
+        run: echo '${{ toJson(matrix) }}'
       - run: sleep 30
