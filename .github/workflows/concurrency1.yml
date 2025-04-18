@@ -5,7 +5,7 @@ on:
     inputs:
       environment:
         description: "Environment"
-        type: environment
+        type: string # Fixed invalid type
         required: true
 
 concurrency:
@@ -29,8 +29,7 @@ jobs:
         run: echo ${{ toJson(strategy) }}
       - name: Print inputs context
         run: echo ${{ toJson(inputs) }}
-      - name: Print secrets context
-        run: echo ${{ toJson(secrets) }}
+      # Removed secrets context for security reasons
       - name: Print matrix context
         run: echo ${{ toJson(matrix) }}
       - run: sleep 30
