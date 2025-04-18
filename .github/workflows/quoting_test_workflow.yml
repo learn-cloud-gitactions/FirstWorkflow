@@ -7,28 +7,28 @@ jobs:
   quoting-test:
     runs-on: ubuntu-latest
     steps:
-      - name: ✅ Working - No quotes
+      - name: No quotes
         run: echo ${{ github.actor }}
 
-      - name: ✅ Working - Double quotes
+      - name: Double quotes
         run: echo "${{ github.actor }}"
 
-      - name: ✅ Working - Single quotes (GitHub evaluates before shell)
+      - name: Single quotes
         run: echo '${{ github.actor }}'
 
-      - name: ✅ Working - JSON context with single quotes
+      - name: toJson with single quotes
         run: echo '${{ toJson(github) }}'
 
-      - name: ❌ Not Working - Broken expression (missing closing bracket)
+      - name: Broken expression (will fail but continue)
         run: echo '${{ github.actor'
-        continue-on-error: true  # So the job doesn't fail on this step
+        continue-on-error: true
 
-      - name: ✅ Working - Escaped bash variable inside single quotes
+      - name: Bash variable with single quotes
         run: |
           MYVAR=hello
-          echo '$MYVAR'  # Prints literally: $MYVAR
+          echo '$MYVAR'
 
-      - name: ✅ Working - Interpolated bash variable with double quotes
+      - name: Bash variable with double quotes
         run: |
           MYVAR=hello
-          echo "$MYVAR"  # Prints: hello
+          echo "$MYVAR"
