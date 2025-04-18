@@ -1,0 +1,34 @@
+name: Quoting Test Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  quoting-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Working - No quotes
+        run: echo ${{ github.actor }}
+
+      - name: ✅ Working - Double quotes
+        run: echo "${{ github.actor }}"
+
+      - name: ✅ Working - Single quotes (GitHub evaluates before shell)
+        run: echo '${{ github.actor }}'
+
+      - name: ✅ Working - JSON context with single quotes
+        run: echo '${{ toJson(github) }}'
+
+      - name: ❌ Not Working - Broken expression (missing closing bracket)
+        run: echo '${{ github.actor'
+        continue-on-error: true  # So the job doesn't fail on this step
+
+      - name: ✅ Working - Escaped bash variable inside single quotes
+        run: |
+          MYVAR=hello
+          echo '$MYVAR'  # Prints literally: $MYVAR
+
+      - name: ✅ Working - Interpolated bash variable with double quotes
+        run: |
+          MYVAR=hello
+          echo "$MYVAR"  # Prints: hello
