@@ -20,7 +20,7 @@ jobs:
         run: echo '${{ toJson(github) }}'
 
       - name: Broken expression (will fail but continue)
-        run: echo '${{ github.actor'
+        run: echo '${{ github.actor}}'
         continue-on-error: true
 
       - name: Bash variable with single quotes
