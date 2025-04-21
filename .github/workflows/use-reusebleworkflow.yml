@@ -1,0 +1,17 @@
+name: Calling Reuseble Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+       description: 'Name of the workflow to call'
+       type: string
+       default: 'nivas'
+       required: false
+
+jobs:
+  call-reusable-workflow:
+    uses: learn-cloud-gitactions/workflows/.github/workflows/reusable.yml@main
+    with:
+      name: ${{ github.event.inputs.name }}
+    secrets:
+      access_token: ${{ secrets.ACCESS_TOKEN }}
