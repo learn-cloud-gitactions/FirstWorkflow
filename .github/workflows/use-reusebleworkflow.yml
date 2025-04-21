@@ -10,7 +10,7 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: learn-cloud-gitactions/workflows/.github/workflows/reusable.yml@main
+    uses: learn-cloud-gitactions/workflows/.github/workflows/reuseble.yml@main
     with:
       name: ${{ github.event.inputs.name }}
     secrets:
