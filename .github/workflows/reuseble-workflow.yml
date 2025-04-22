@@ -1,0 +1,31 @@
+name: Reuseble Workflow
+on:
+  workflow_call:
+    outputs:
+      date:
+        description: 'The date when the workflow was run'
+        value: ${{ jobs.generate-output.outputs.date }}
+
+
+jobs:
+  generate-output:
+    runs-on: ubuntu-latest
+    outputs:
+      masked-value: ${{ steps.gen-output.outputs.masked-value }}
+      not-masked-value: ${{ steps.gen-output.outputs.not-masked-value }}
+      date: ${{ steps.gen-output.outputs.date }}
+    steps:
+      - name: Generate output
+        id: gen-output
+        shell: bash
+        run: |
+          echo "date=$(date)" >> "$GITHUB_OUTPUT"
+          echo "::group::generate output"
+          echo "::add-mask::This is the masked value in log str"
+          echo "masked-value=This is the masked value in log str" >> "$GITHUB_OUTPUT"
+          echo "::endgroup::"
+
+          echo "::group::unmasked"
+          echo "::notice::This is the not masked value in log str"
+          echo "not-masked-value=This is the not masked value in log str" >> "$GITHUB_OUTPUT"
+          echo "::endgroup::"d

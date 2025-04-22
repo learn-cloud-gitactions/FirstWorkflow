@@ -15,3 +15,11 @@ jobs:
       name: ${{ github.event.inputs.name }}
     secrets:
       access_token: ${{ secrets.ACCESS_TOKEN }}
+
+  call-reusable-workflow-2:
+    uses: ./.github\workflows\reuseble-workflow.yml
+  using-reusable-workflow-output:
+    needs: call-reusable-workflow-2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Date ${{ needs.call-reusable-workflow-2.outputs.date }}"
