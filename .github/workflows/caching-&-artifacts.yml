@@ -17,15 +17,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Use axios
+      - name: Use Axios
         uses: actions/github-script@v6
         with:
           script: |
             const axios = require('axios');
-            console.log(axios);
-            const response = await axios('https://icanhazdadjoke.com/', {
-              headers: {
-                'Accept': 'test/plain'
-              }
-            });
-            console.log(response.data);
+            const res = await axios('https://icanhazdadjoke.com/', { headers: { Accept: 'text/plain' } })
+            console.log(res.data)
