@@ -31,7 +31,14 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        run: npm test
+        run: |
+          npm test
+          mkdir -p coverage
+
+      - name: Debug the coverage directory
+        run: |
+          echo "Debugging the coverage directory..."
+          ls -a coverage
       - name: Upload Code Coverage Report
         uses: actions/upload-artifact@v3
         if: always()
