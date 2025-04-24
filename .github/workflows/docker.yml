@@ -1,0 +1,22 @@
+name: Docker
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:23-alpine3.20
+      # credentials:
+      #   username:
+      #   password: 
+      env:
+        API_URL: dummy_api_url.com
+    steps:
+      - name: Log node & OS version
+        run: |
+          echo "Node version: $(node -v)"
+          echo "OS version: $(cat /etc/os-release)" 
+      - name: Log environment variables
+        run: |
+          echo "API_URL: $API_URL"
