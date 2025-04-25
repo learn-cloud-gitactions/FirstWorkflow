@@ -17,6 +17,11 @@ jobs:
         run: |
           echo "Node version: $(node -v)"
           echo "OS version: $(cat /etc/os-release)" 
+      - name: Create a file
+        run: |
+          echo "Hello from the container!" > hello.txt
+          pwd
+          ls -a
       - name: Log environment variables
         run: |
           echo "API_URL: $API_URL"
@@ -30,3 +35,13 @@ jobs:
         uses: docker://node:18.16-alpine3.17
         with:
           args: -v
+      - name: Show files in the container
+        uses: docker://node:18.16-alpine3.17
+        with:
+          entrypoint: cat
+          args: hello.txt
+      - name: Show files in the container
+        uses: docker://node:18.16-alpine3.17
+        with:
+          entrypoint: ls
+          args: -a
