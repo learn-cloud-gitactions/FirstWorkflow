@@ -20,3 +20,13 @@ jobs:
       - name: Log environment variables
         run: |
           echo "API_URL: $API_URL"
+
+      - name: Container in step
+        uses: docker://node:18.16-alpine3.17
+        with:
+          entrypoint: /usr/local/bin/node
+          args: -e "console.log('Hello from the container!')"
+      - name: Container in step
+        uses: docker://node:18.16-alpine3.17
+        with:
+          args: -v
